@@ -27,7 +27,6 @@ import io.netty.handler.codec.http.HttpHeaderValues;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpVersion;
-import io.netty.handler.codec.spdy.SpdyOrHttpChooser.SelectedProtocol;
 import io.netty.handler.ssl.ApplicationProtocolConfig;
 import io.netty.handler.ssl.ApplicationProtocolConfig.Protocol;
 import io.netty.handler.ssl.ApplicationProtocolConfig.SelectedListenerFailureBehavior;
@@ -64,8 +63,7 @@ public final class SpdyClient {
                         SelectorFailureBehavior.NO_ADVERTISE,
                         // ACCEPT is currently the only mode supported by both OpenSsl and JDK providers.
                         SelectedListenerFailureBehavior.ACCEPT,
-                        SelectedProtocol.SPDY_3_1.protocolName(),
-                        SelectedProtocol.HTTP_1_1.protocolName()))
+                        "spdy/3.1", "http/1.1"))
             .build();
 
         HttpResponseClientHandler httpResponseHandler = new HttpResponseClientHandler();

@@ -21,7 +21,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.spdy.SpdyOrHttpChooser.SelectedProtocol;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.ApplicationProtocolConfig;
@@ -64,8 +63,7 @@ public final class SpdyServer {
                         SelectorFailureBehavior.NO_ADVERTISE,
                         // ACCEPT is currently the only mode supported by both OpenSsl and JDK providers.
                         SelectedListenerFailureBehavior.ACCEPT,
-                        SelectedProtocol.SPDY_3_1.protocolName(),
-                        SelectedProtocol.HTTP_1_1.protocolName()))
+                        "spdy/3.1", "http/1.1"))
             .build();
 
         // Configure the server.

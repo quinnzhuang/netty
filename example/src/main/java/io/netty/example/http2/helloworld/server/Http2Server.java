@@ -22,7 +22,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http2.Http2OrHttpChooser.SelectedProtocol;
 import io.netty.handler.codec.http2.Http2SecurityUtil;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -64,8 +63,7 @@ public final class Http2Server {
                     SelectorFailureBehavior.NO_ADVERTISE,
                     // ACCEPT is currently the only mode supported by both OpenSsl and JDK providers.
                     SelectedListenerFailureBehavior.ACCEPT,
-                    SelectedProtocol.HTTP_2.protocolName(),
-                    SelectedProtocol.HTTP_1_1.protocolName()))
+                    "h2", "http/1.1"))
                 .build();
         } else {
             sslCtx = null;
